@@ -1,12 +1,16 @@
 package com.qa.client;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
+import java.util.Map;
 
 import org.apache.http.Header;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
@@ -14,31 +18,38 @@ import org.json.JSONObject;
 
 public class RestClient {
 
-	// 1.GET method
-
-	public void get(String url) throws ClientProtocolException, IOException {
+	// 1.GET method without headers
+	public CloseableHttpResponse get(String url) throws ClientProtocolException, IOException {
 		CloseableHttpClient httpClient = HttpClients.createDefault();
 		HttpGet httpGet = new HttpGet(url); // http get request
-		CloseableHttpResponse CloseableHttpResponse = httpClient.execute(httpGet); // hit the GET URL
+		CloseableHttpResponse closeableHttpResponse = httpClient.execute(httpGet); // hit the GET URL
+		return closeableHttpResponse;
+	}
 
-		// a.status code:
-		int statusCode = CloseableHttpResponse.getStatusLine().getStatusCode();
-		System.out.println("Status code--->" + statusCode);
+	// 2.GET method with headers
+	public CloseableHttpResponse get(String url, HashMap<String, String> headerMap)
+			throws ClientProtocolException, IOException {
+		CloseableHttpClient httpClient = HttpClients.createDefault();
+		HttpGet httpGet = new HttpGet(url); // http get request
 
-		// b.Json String:
-		String responseString = EntityUtils.toString(CloseableHttpResponse.getEntity(), "UTF-8");
-		JSONObject responseJson = new JSONObject(responseString);
-		System.out.println("Response JSON from Api---->" + responseJson);
-
-		// c.all Headers:
-		Header[] headersArray = CloseableHttpResponse.getAllHeaders();
-
-		HashMap<String, String> allHeaders = new HashMap<String, String>();
-		for (Header header : headersArray) {
-			allHeaders.put(header.getName(), header.getValue());
+		for (Map.Entry<String, String> entry : headerMap.entrySet()) {
+			httpGet.addHeader(entry.getKey(), entry.getValue());
 		}
+		CloseableHttpResponse closeableHttpResponse = httpClient.execute(httpGet); // hit the GET URL
+		return closeableHttpResponse;
+	}
 
-		System.out.println("Headers Array--->" + allHeaders);
-
+	// 3. POST method
+	public CloseableHttpResponse post(String url, String entityString, HashMap<String, String> headerMap)
+			throws ClientProtocolException, IOException {
+		CloseableHttpClient httpClient = HttpClients.createDefault();
+		HttpPost httpPost = new HttpPost(url);
+		httpPost.setEntity(new StringEntity(entityString));
+		// for headers
+		for (Map.Entry<String, String> entry : headerMap.entrySet()) {
+			httpPost.addHeader(entry.getKey(), entry.getValue());
+		}
+		CloseableHttpResponse closeableHttpResponse = httpClient.execute(httpPost);
+		return closeableHttpResponse;
 	}
 }

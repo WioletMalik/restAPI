@@ -2,20 +2,20 @@
 <testng-results total="1" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2022-01-31T04:32:59Z" name="Default suite" finished-at="2022-01-31T04:33:00Z" duration-ms="676">
+  <suite started-at="2022-02-01T03:05:34Z" name="Default suite" finished-at="2022-02-01T03:05:38Z" duration-ms="3973">
     <groups>
     </groups>
-    <test started-at="2022-01-31T04:32:59Z" name="Default test" finished-at="2022-01-31T04:33:00Z" duration-ms="676">
-      <class name="com.qa.tests.GetApiTest">
-        <test-method is-config="true" signature="initialize()[pri:0, instance:com.qa.tests.GetApiTest@1b1426f4]" started-at="2022-01-30T23:32:59Z" name="initialize" finished-at="2022-01-30T23:32:59Z" duration-ms="20" status="PASS">
+    <test started-at="2022-02-01T03:05:34Z" name="Default test" finished-at="2022-02-01T03:05:38Z" duration-ms="3973">
+      <class name="com.qa.tests.PostAPITest">
+        <test-method is-config="true" signature="initialize()[pri:0, instance:com.qa.tests.PostAPITest@57d7f8ca]" started-at="2022-01-31T22:05:34Z" name="initialize" finished-at="2022-01-31T22:05:34Z" duration-ms="4" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- initialize -->
-        <test-method signature="getApiTestWithOutHeaders()[pri:0, instance:com.qa.tests.GetApiTest@1b1426f4]" started-at="2022-01-30T23:32:59Z" name="getApiTestWithOutHeaders" finished-at="2022-01-30T23:33:00Z" duration-ms="610" status="PASS">
+        <test-method signature="postAPI()[pri:0, instance:com.qa.tests.PostAPITest@57d7f8ca]" started-at="2022-01-31T22:05:34Z" name="postAPI" finished-at="2022-01-31T22:05:38Z" duration-ms="3950" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- getApiTestWithOutHeaders -->
-      </class> <!-- com.qa.tests.GetApiTest -->
+        </test-method> <!-- postAPI -->
+      </class> <!-- com.qa.tests.PostAPITest -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>
